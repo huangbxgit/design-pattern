@@ -1,9 +1,10 @@
 package proxy.mySelfJdkProxy;
 
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-public class MySelfJdkProxy implements  MySelfInvocationHandler{
+public class MySelfJdkProxy implements InvocationHandler {
     private Object target;
 
     public MySelfJdkProxy(Object target){

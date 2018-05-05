@@ -5,6 +5,9 @@ import sun.misc.ProxyGenerator;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
 
 public class MySelfProxy {
     public static Object newProxyInstance(MySelfClassLoader classLoader, Class[] ins, MySelfJdkProxy mySelfJdkProxy) {
@@ -35,17 +38,21 @@ public class MySelfProxy {
         try {
             proxyClass = classLoader.findClass("myProxy$0");
             System.out.println(proxyClass);
+            Constructor cons = proxyClass.getConstructor(InvocationHandler.class);
+            //生成这个代理类的对象，返回
+            return cons.newInstance(mySelfJdkProxy);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
-        //生成这个代理类的对象，返回
-        try {
-            return proxyClass.newInstance();
-        } catch (InstantiationException e) {
+        } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
         }
+
         return null;
     }
 }

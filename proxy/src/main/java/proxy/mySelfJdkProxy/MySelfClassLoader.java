@@ -28,7 +28,8 @@ public class MySelfClassLoader extends ClassLoader{
                     while((len = in.read(buff))!= -1){
                         out.write(buff,0,len);
                     }
-                    return  defineClass(className,out.toByteArray(),0,out.size());
+                    String pp = classPathFile.getPath()+File.separator+name+".class";
+                    return  defineClass(null,out.toByteArray(),0,out.size());
                 }catch (Exception e){
                     e.printStackTrace();
                 }finally {

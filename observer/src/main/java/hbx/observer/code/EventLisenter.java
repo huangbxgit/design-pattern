@@ -28,7 +28,7 @@ public class EventLisenter {
     }
 
 
-    protected void trigger(Enum call){
+    public void trigger(Enum call){
         if(!this.events.containsKey(call)){ return ;}
         trigger(this.events.get(call).setTrigger(call.toString()));
     }
